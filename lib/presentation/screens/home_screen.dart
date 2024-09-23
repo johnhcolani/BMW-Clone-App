@@ -13,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   double _opacity = 0.0;
   double _sliderValue = 60.0;
+  int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -21,6 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _opacity = (scrollOffset / 2).clamp(0.0, 0.5);
       });
+    });
+  }
+
+  // Function to handle BottomNavigationBar taps
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
   }
 
@@ -33,11 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:const Color(0xFF302921),
       body: Stack(
         children: [
           Stack(
             children: [
-
               SingleChildScrollView(
                 controller: _scrollController,
                 child: Column(
@@ -46,9 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Image.asset('assets/images/background.png'),
                         Transform.translate(
-                          offset: const Offset(0, 620),
+                          offset: const Offset(0, 500),
                           child: SizedBox(
-                            //  color: Colors.yellow,
                             width: double.infinity,
                             child: Center(
                               child: Column(
@@ -68,9 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Text(
                                     'Updated from vehicle 9/22/2024 9:43 PM',
-                                    style:
-                                    TextStyle(color: Colors.grey.shade500),
-                                  )
+                                    style: TextStyle(color: Colors.grey.shade500),
+                                  ),
                                 ],
                               ),
                             ),
@@ -78,35 +85,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 30),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 80,
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      height: 120,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SliderTheme(
                                 data: SliderTheme.of(context).copyWith(
                                   thumbShape: SliderComponentShape.noThumb,
-                                  activeTrackColor: Colors
-                                      .white, // Customize active track color
+                                  activeTrackColor: Colors.white,
                                   inactiveTrackColor: Colors.grey,
-                                  // Customize inactive track color
                                 ),
                                 child: Slider(
-                                    value: _sliderValue,
-                                    min: 0.0,
-                                    max: 100,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        _sliderValue = newValue;
-                                      });
-                                    }),
+                                  value: _sliderValue,
+                                  min: 0.0,
+                                  max: 100,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _sliderValue = newValue;
+                                    });
+                                  },
+                                ),
                               ),
                               Expanded(
                                 child: Row(
@@ -114,74 +121,170 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Image.asset('assets/images/car_battery_icon.png',height: 30,width: 30,),
-                                        const SizedBox(width: 16,),
-                                        const Text('State of charge',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),)
+                                        Image.asset(
+                                          'assets/images/car_battery_icon.png',
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        const SizedBox(width: 16),
+                                        const Text(
+                                          'State of charge',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     const Row(
                                       children: [
-                                        Text('64',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                                        Text('% /',style: TextStyle(fontSize: 16),),
-                                        Text('229',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                                        Text('mi',style: TextStyle(fontSize: 16),),
+                                        Text(
+                                          '64',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text('% /', style: TextStyle(fontSize: 16)),
+                                        Text(
+                                          '229',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text('mi', style: TextStyle(fontSize: 16)),
                                       ],
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
-
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 50),
-                        child:  Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 200,),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      height: 120,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 50),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 200,),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
                       ),
-                    )
+                      height: 120,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      height: 120,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      height: 120,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAFAF9),
+                        //borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      height: 120,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
+                        child: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),],
+              ),
+            ],
           ),
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  0), // No border radius (if needed, change this)
+              borderRadius: BorderRadius.circular(0),
               child: BackdropFilter(
-                filter:
-                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
                   height: 100,
-                  color: Colors.black.withOpacity(
-                      _opacity), // Semi-transparent for glossy effect
+                  color: Colors.black.withOpacity(_opacity),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -194,19 +297,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 30,
                               width: 60,
                               color: Colors.white,
-                              alignment: const Alignment(-2.5, 0),
                             ),
                             const Text(
                               'iX xDrive50',
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                              style: TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             Image.asset(
                               'assets/images/img_2.png',
                               width: 60,
                               height: 30,
                               color: Colors.white,
-                              alignment: const Alignment(-4, 0),
                             ),
                           ],
                         ),
@@ -218,6 +318,34 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.battery_charging_full),
+            label: 'Battery',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.car_repair),
+            label: 'Car',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
       ),
     );
   }
