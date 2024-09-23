@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           ),
 
         ],
-        child: SplashScreen(),
+        child: const SplashScreen(),
       ),
     );
   }
