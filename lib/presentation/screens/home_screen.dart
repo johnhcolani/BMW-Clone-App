@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController.addListener(() {
       double scrollOffset = _scrollController.offset;
       setState(() {
-        _opacity = (scrollOffset / 50).clamp(0.0, 0.5);
+        _opacity = (scrollOffset / 2).clamp(0.0, 0.5);
       });
     });
   }
@@ -35,139 +35,166 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Transform.translate(
-            offset: const Offset(0, -180),
-            child: Stack(
-              children: [
-                ListView(
-                  shrinkWrap: false,
-                  children: [
-                    Stack(
-                      children: [
-                        Image.asset('assets/images/background.png'),
-                        Transform.translate(
-                          offset: const Offset(0, 620),
-                          child: SizedBox(
-                            //  color: Colors.yellow,
-                            width: double.infinity,
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'CHECK STATUS',
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 18,
-                                      )
-                                    ],
-                                  ),
-                                  Text(
-                                    'Updated from vehicle 9/22/2024 9:43 PM',
-                                    style:
-                                        TextStyle(color: Colors.grey.shade500),
-                                  )
-                                ],
-                              ),
+          Stack(
+            children: [
+
+            SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Image.asset('assets/images/background.png'),
+                      Transform.translate(
+                        offset: const Offset(0, 620),
+                        child: SizedBox(
+                          //  color: Colors.yellow,
+                          width: double.infinity,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'CHECK STATUS',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 18,
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  'Updated from vehicle 9/22/2024 9:43 PM',
+                                  style:
+                                      TextStyle(color: Colors.grey.shade500),
+                                )
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 30),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 80,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  thumbShape: SliderComponentShape.noThumb,
-                                  activeTrackColor: Colors
-                                      .white, // Customize active track color
-                                  inactiveTrackColor: Colors.grey,
-                                  // Customize inactive track color
-                                ),
-                                child: Slider(
-                                    value: _sliderValue,
-                                    min: 0.0,
-                                    max: 100,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        _sliderValue = newValue;
-                                      });
-                                    }),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, 30),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFE8E8E8),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        height: 80,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                thumbShape: SliderComponentShape.noThumb,
+                                activeTrackColor: Colors
+                                    .white, // Customize active track color
+                                inactiveTrackColor: Colors.grey,
+                                // Customize inactive track color
                               ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset('assets/images/car_battery_icon.png',height: 30,width: 30,),
-                                       const SizedBox(width: 16,),
-                                        const Text('State of charge',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),)
-                                      ],
-                                    ),
-                                    const Row(
-                                      children: [
-                                        Text('64',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                                        Text('% /',style: TextStyle(fontSize: 16),),
-                                        Text('229',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-                                        Text('mi',style: TextStyle(fontSize: 16),),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-
+                              child: Slider(
+                                  value: _sliderValue,
+                                  min: 0.0,
+                                  max: 100,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _sliderValue = newValue;
+                                    });
+                                  }),
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset('assets/images/car_battery_icon.png',height: 30,width: 30,),
+                                     const SizedBox(width: 16,),
+                                      const Text('State of charge',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),)
+                                    ],
+                                  ),
+                                  const Row(
+                                    children: [
+                                      Text('64',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                                      Text('% /',style: TextStyle(fontSize: 16),),
+                                      Text('229',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                                      Text('mi',style: TextStyle(fontSize: 16),),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
+
                       ),
                     ),
-                    const SizedBox(
-                      height: 50,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, 50),
+                      child:  Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFE8E8E8),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        height: 200,),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 50),
-                        child:  Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 200,),
-                      ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, 50),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFE8E8E8),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        height: 200,),
                     ),
-                    const SizedBox(
-                      height: 50,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, 50),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFE8E8E8),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        height: 200,),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Transform.translate(
-                        offset: const Offset(0, 50),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFE8E8E8),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          height: 200,),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Transform.translate(
+                      offset: const Offset(0, 50),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFE8E8E8),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        height: 200,),
+                    ),
+                  ),
+                ],
+              ),
+            ),],
           ),
           Positioned(
             top: 0,
