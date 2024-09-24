@@ -33,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
           builder: (context, state) {
             if (state is SplashLoading || state is SplashInitial) {
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
+
                   children: [
                     Image.asset(
                       'assets/images/my_bmw.png',
@@ -43,7 +43,13 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     const Opacity(
                         opacity: 0.1,
-                        child: CircularProgressIndicator(color: Colors.white,)),
+                        child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: CircularProgressIndicator(
+
+                            color: Colors.white,),
+                        )),
                   ],
                 ),
               );
